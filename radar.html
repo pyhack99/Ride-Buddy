@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Radar - Ride Buddy</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Specifikke justeringer for kortet i radar.html */
+        #map {
+            height: calc(100vh - 140px); /* Justeret til iPhone Safe Area + Nav */
+            width: 94%;
+            margin: 10px auto;
+            border-radius: 24px;
+            z-index: 1;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+        }
+
+        /* Overlay til knapper ovenpå kortet */
+        .map-overlay {
+            position: fixed;
+            bottom: 110px;
+            right: 25px;
+            z-index: 1000;
+        }
+
+        .map-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 28px;
+            background: var(--card-bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .map-btn:active { transform: scale(0.9); }
+
+        /* Styling af kort-popups til mørkt tema */
+        .leaflet-popup-content-wrapper {
+            background: var(--card-bg) !important;
+            color: var(--text) !important;
+            border-radius: 12px !important;
+        }
+        .leaflet-popup-tip { background: var(--card-bg) !important; }
+        
+        /* Fjern Leaflet logo for et "renere" app look */
+        .leaflet-control-attribution { display: none !important; }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <header style="padding: 20px 20px 10px 20px;">
+            <div class="logo">Live Radar</div>
+            <p class="sub-text">Klik på kortet for at rapportere kamera</p>
+        </header>
+
+        <main>
+            <div id="map"></div>
+
+            <div class="map-overlay">
+                <button class="map-btn" onclick="centerOnMe()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2c-4.418 0-8 3.582-8 8 0 5.25 8 13 8 13s8-7.75 8-13c0-4.418-3.582-8-8-8z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </button>
+            </div>
+        </main>
+
+        <nav class="dynamic-island">
+            <a href="index.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+            </a>
+            <a href="outfit.html" class="nav-link">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 4.5c-1.5 0-2.5 1-2.5 1S8 4 6 4C4 4 2 5 2 7v3c0 1.1.9 2 2 2h1.5v8c0 1.1.9 2 2 2h9c1.1 0 2-.9 2-2v-8H20c1.1 0 2-.9 2-2V7c0-2-2-3-4-3-2 0-3.5 1.5-3.5 1.5S13.5 4.5 12 4.5z"/>
+                </svg>
+            </a>
+            <a href="radar.html" class="nav-link active">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            </a>
+            <a href="chat.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            </a>
+        </nav>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

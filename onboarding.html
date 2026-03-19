@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velkommen - Ride Buddy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <main class="onboarding-container">
+            <div class="hero-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71L12 2z"/></svg>
+            </div>
+
+            <h2 class="step-title">Opsæt din profil</h2>
+            <p class="sub-text" style="margin-bottom: 30px;">Vælg dit land for at få præcis radar-data og lokale vejrforhold.</p>
+
+            <div class="card" style="text-align: left;">
+                <label class="sub-text" style="display: block; margin-bottom: 8px; text-transform: uppercase; font-weight: 700; font-size: 0.65rem;">Dit Køretøj</label>
+                <input type="text" id="ob-vehicle" placeholder="F.eks. BMW S1000RR" style="margin-bottom: 20px;">
+
+                <label class="sub-text" style="display: block; margin-bottom: 8px; text-transform: uppercase; font-weight: 700; font-size: 0.65rem;">Vælg Land</label>
+                <select id="ob-country" style="width: 100%;">
+                    <option value="Danmark">Danmark</option>
+                    <option value="Sverige">Sverige</option>
+                    <option value="Norge">Norge</option>
+                    <option value="Tyskland">Tyskland</option>
+                    <option value="USA">USA</option>
+                    <option value="Storbritannien">Storbritannien</option>
+                    <option value="Frankrig">Frankrig</option>
+                    <option value="Italien">Italien</option>
+                    <option value="Spanien">Spanien</option>
+                    <option value="Holland">Holland</option>
+                    <option value="Østrig">Østrig</option>
+                    <option value="Schweiz">Schweiz</option>
+                    </select>
+            </div>
+
+            <button class="primary-btn" style="margin-top: 20px;" onclick="finishOnboarding()">
+                Start min rejse
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+            </button>
+        </main>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        function finishOnboarding() {
+            const vehicle = document.getElementById('ob-vehicle').value.trim();
+            const country = document.getElementById('ob-country').value;
+            if (!vehicle) { alert("Angiv venligst en maskine."); return; }
+            
+            localStorage.setItem('rb_vehicle', vehicle);
+            localStorage.setItem('rb_country', country);
+            localStorage.setItem('rb_onboarding_complete', 'true');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
